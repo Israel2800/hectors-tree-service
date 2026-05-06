@@ -12,6 +12,7 @@ The contact page is ready for:
 To make the form send successfully in production, create a `.env` file with:
 
 ```bash
+VITE_PUBLIC_BASE_PATH=/
 VITE_PLATFORM_API_BASE_URL=https://api.tree-services-platform.com
 VITE_PLATFORM_API_PREFIX=v1
 VITE_PLATFORM_TENANT_SLUG=hectors-tree-service
@@ -22,6 +23,7 @@ Important:
 
 - This frontend now submits a clean JSON lead request directly to the shared backend.
 - The backend is responsible for validation, rate limiting, anti-bot verification, persistence, and email delivery.
+- For Cloudflare Pages on a custom domain, keep `VITE_PUBLIC_BASE_PATH=/` so built assets load from the domain root.
 
 ## Responsive images
 

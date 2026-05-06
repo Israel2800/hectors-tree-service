@@ -2,7 +2,6 @@
   "name": "hectors-tree-service",
   "private": true,
   "version": "1.0.0",
-  "homepage": "https://Israel2800.github.io/hectors-tree-service",
   "scripts": {
     "dev": "vite",
     "images:generate": "node scripts/generate-responsive-images.mjs",
