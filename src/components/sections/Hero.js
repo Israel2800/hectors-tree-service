@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import { HiPhone, HiChevronDown } from 'react-icons/hi'
 import { FaCheckCircle, FaStar } from 'react-icons/fa'
-import mainImage from '../../assets/images/mainImage.jpg'
+import ResponsiveImage from '../ui/ResponsiveImage'
 import { company } from '../../data'
 
 const badges = [
@@ -13,62 +13,55 @@ const badges = [
 
 export default function Hero() {
   return (
-    <section className="relative min-h-screen flex items-center overflow-hidden">
-
-      {/* Background image */}
+    <section className="relative hero-screen flex items-center overflow-hidden">
       <div className="absolute inset-0">
-        <img
-          src={mainImage}
+        <ResponsiveImage
+          image="mainImage"
           alt="Professional tree service"
+          sizes="100vw"
+          loading="eager"
+          fetchPriority="high"
           className="w-full h-full object-cover object-center"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-gray-950/90 via-gray-950/70 to-gray-950/30" />
         <div className="absolute inset-0 bg-gradient-to-t from-gray-950/60 via-transparent to-transparent" />
       </div>
 
-      {/* Content */}
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32 lg:py-40 w-full">
         <div className="max-w-2xl xl:max-w-3xl">
-
-          {/* Trust badge */}
           <div className="animate-fade-in inline-flex items-center gap-2 bg-forest-700/25 border border-forest-500/40 text-forest-300 text-xs font-bold uppercase tracking-wider px-4 py-2 rounded-full mb-7">
             <span className="w-2 h-2 rounded-full bg-forest-400 animate-pulse" />
-            {company.license} — Serving Nashville, TN
+            {company.license} - Serving Nashville, TN
           </div>
 
-          {/* Heading */}
           <h1 className="animate-fade-in-up animation-delay-100 font-heading font-extrabold text-5xl sm:text-6xl lg:text-7xl text-white leading-[1.05] mb-6">
             Expert Tree Care{' '}
             <span className="text-forest-400">You Can Trust</span>
           </h1>
 
-          {/* Sub */}
           <p className="animate-fade-in-up animation-delay-200 text-xl text-gray-300 leading-relaxed mb-8 max-w-xl">
             Professional tree removal, trimming &amp; care for homeowners
             across {company.serviceAreas}.
           </p>
 
-          {/* Review stars */}
           <div className="animate-fade-in-up animation-delay-300 flex items-center gap-2 mb-8">
             <div className="flex">
               {[...Array(5)].map((_, i) => (
                 <FaStar key={i} className="w-4 h-4 text-amber-400" />
               ))}
             </div>
-            <span className="text-gray-300 text-sm font-medium">5.0 · Trusted by 500+ homeowners</span>
+            <span className="text-gray-300 text-sm font-medium">5.0 - Trusted by 500+ homeowners</span>
           </div>
 
-          {/* Trust bullets */}
           <div className="animate-fade-in-up animation-delay-400 flex flex-wrap gap-x-6 gap-y-2 mb-10">
-            {badges.map((b) => (
-              <span key={b} className="flex items-center gap-1.5 text-sm text-gray-300">
+            {badges.map((badge) => (
+              <span key={badge} className="flex items-center gap-1.5 text-sm text-gray-300">
                 <FaCheckCircle className="w-3.5 h-3.5 text-forest-400 shrink-0" />
-                {b}
+                {badge}
               </span>
             ))}
           </div>
 
-          {/* CTA buttons */}
           <div className="animate-fade-in-up animation-delay-500 flex flex-wrap gap-4">
             <Link
               to="/contact"
@@ -87,7 +80,6 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* Scroll cue */}
       <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1.5 text-white/40 animate-bounce">
         <span className="text-[10px] font-bold uppercase tracking-widest">Scroll</span>
         <HiChevronDown className="w-5 h-5" />

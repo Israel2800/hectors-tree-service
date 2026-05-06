@@ -2,20 +2,20 @@ import { Link } from 'react-router-dom'
 import { HiPhone, HiArrowRight } from 'react-icons/hi'
 import { useInView } from '../../hooks/useInView'
 import { company } from '../../data'
-import treeRemoval from '../../assets/images/tree-removal.jpg'
+import ResponsiveImage from '../ui/ResponsiveImage'
 
 export default function ContactCTA() {
   const [ref, isInView] = useInView(0.2)
 
   return (
     <section className="relative py-24 overflow-hidden">
-      {/* BG */}
       <div className="absolute inset-0">
-        <img
-          src={treeRemoval}
+        <ResponsiveImage
+          image="tree-removal"
           alt="Tree service crew"
+          sizes="100vw"
           className="w-full h-full object-cover"
-          loading="lazy"
+          loading="eager"
         />
         <div className="absolute inset-0 bg-forest-900/88" />
       </div>
@@ -34,7 +34,7 @@ export default function ContactCTA() {
             Get Your Free Estimate Today
           </h2>
           <p className="text-gray-300 text-lg leading-relaxed mb-10 max-w-xl mx-auto">
-            No obligation, no pressure — just an honest quote from a team
+            No obligation, no pressure - just an honest quote from a team
             that cares about your property as much as you do.
           </p>
 

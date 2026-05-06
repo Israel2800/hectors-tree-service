@@ -4,6 +4,7 @@ import { GiTreeBranch } from 'react-icons/gi'
 import { HiArrowRight } from 'react-icons/hi'
 import { useInView } from '../../hooks/useInView'
 import SectionTitle from '../ui/SectionTitle'
+import ResponsiveImage from '../ui/ResponsiveImage'
 import { services } from '../../data'
 
 const iconMap = {
@@ -25,11 +26,11 @@ function ServiceCard({ service, delay }) {
       }`}
       style={{ transitionDelay: `${delay}ms` }}
     >
-      {/* Image */}
       <div className="relative h-52 overflow-hidden">
-        <img
-          src={service.image}
+        <ResponsiveImage
+          image={service.imageKey}
           alt={service.title}
+          sizes="(min-width: 1024px) 24vw, (min-width: 640px) 50vw, 100vw"
           className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
           loading="lazy"
         />
@@ -39,7 +40,6 @@ function ServiceCard({ service, delay }) {
         </div>
       </div>
 
-      {/* Body */}
       <div className="p-5">
         <h3 className="font-heading font-bold text-gray-900 text-lg mb-2">{service.title}</h3>
         <p className="text-gray-500 text-sm leading-relaxed mb-4">{service.shortDesc}</p>

@@ -2,17 +2,18 @@ import { Link } from 'react-router-dom'
 import { FaTree, FaLeaf, FaSeedling } from 'react-icons/fa'
 import { GiTreeBranch } from 'react-icons/gi'
 import { HiArrowRight, HiCheckCircle } from 'react-icons/hi'
-import SectionTitle from '../components/ui/SectionTitle'
 import ContactCTA from '../components/sections/ContactCTA'
+import PageHero from '../components/ui/PageHero'
+import ResponsiveImage from '../components/ui/ResponsiveImage'
+import SectionTitle from '../components/ui/SectionTitle'
 import { useInView } from '../hooks/useInView'
 import { services, faqs, company } from '../data'
-import mainImage from '../assets/images/mainImage.jpg'
 
 const iconMap = {
-  'tree-removal':  FaTree,
+  'tree-removal': FaTree,
   'tree-trimming': FaLeaf,
   'stump-removal': GiTreeBranch,
-  'tree-care':     FaSeedling,
+  'tree-care': FaSeedling,
 }
 
 function ServiceRow({ service, index }) {
@@ -28,9 +29,10 @@ function ServiceRow({ service, index }) {
       }`}
     >
       <div className={`h-72 lg:h-auto lg:min-h-[380px] ${isEven ? '' : 'lg:order-last'}`}>
-        <img
-          src={service.image}
+        <ResponsiveImage
+          image={service.imageKey}
           alt={service.title}
+          sizes="(min-width: 1024px) 50vw, 100vw"
           className="w-full h-full object-cover"
           loading="lazy"
         />
@@ -45,10 +47,10 @@ function ServiceRow({ service, index }) {
         </h2>
         <p className="text-gray-600 leading-relaxed mb-6">{service.description}</p>
         <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-2 mb-7">
-          {service.features.map((f) => (
-            <li key={f} className="flex items-center gap-2 text-sm text-gray-700">
+          {service.features.map((feature) => (
+            <li key={feature} className="flex items-center gap-2 text-sm text-gray-700">
               <HiCheckCircle className="w-4 h-4 text-forest-600 shrink-0" />
-              {f}
+              {feature}
             </li>
           ))}
         </ul>
@@ -66,6 +68,7 @@ function ServiceRow({ service, index }) {
 
 function FAQ({ q, a, delay }) {
   const [ref, inView] = useInView()
+
   return (
     <div
       ref={ref}
@@ -83,19 +86,13 @@ function FAQ({ q, a, delay }) {
 export default function Services() {
   return (
     <>
-      {/* ── Hero Banner ── */}
-      <section className="relative h-72 sm:h-96 flex items-end overflow-hidden">
-        <div className="absolute inset-0">
-          <img src={mainImage} alt="Tree services" className="w-full h-full object-cover" />
-          <div className="absolute inset-0 bg-gray-950/65" />
-        </div>
-        <div className="relative z-10 container-xl pb-14 pt-32">
-          <p className="text-forest-400 text-sm font-bold uppercase tracking-widest mb-2">What We Do</p>
-          <h1 className="font-heading font-extrabold text-4xl sm:text-5xl text-white">Our Services</h1>
-        </div>
-      </section>
+      <PageHero
+        imageKey="mainImage"
+        alt="Tree services"
+        eyebrow="What We Do"
+        title="Our Services"
+      />
 
-      {/* ── Services List ── */}
       <section className="page-section bg-white">
         <div className="container-xl">
           <SectionTitle
@@ -104,14 +101,13 @@ export default function Services() {
             subtitle="Each service is performed by certified professionals using modern equipment and industry-best techniques."
           />
           <div className="space-y-8">
-            {services.map((service, i) => (
-              <ServiceRow key={service.id} service={service} index={i} />
+            {services.map((service, index) => (
+              <ServiceRow key={service.id} service={service} index={index} />
             ))}
           </div>
         </div>
       </section>
 
-      {/* ── Emergency Banner ── */}
       <section className="bg-red-700 py-12">
         <div className="container-xl text-center text-white">
           <h2 className="font-heading font-bold text-2xl sm:text-3xl mb-2">
@@ -129,17 +125,16 @@ export default function Services() {
         </div>
       </section>
 
-      {/* ── FAQs ── */}
       <section className="page-section bg-gray-50">
         <div className="container-xl">
           <SectionTitle
             eyebrow="Questions & Answers"
             title="Frequently Asked Questions"
-            subtitle="Can't find your answer? Give us a call — we're happy to help."
+            subtitle="Can't find your answer? Give us a call - we're happy to help."
           />
           <div className="grid md:grid-cols-2 gap-5 max-w-4xl mx-auto">
-            {faqs.map(({ q, a }, i) => (
-              <FAQ key={q} q={q} a={a} delay={i * 60} />
+            {faqs.map(({ q, a }, index) => (
+              <FAQ key={q} q={q} a={a} delay={index * 60} />
             ))}
           </div>
         </div>

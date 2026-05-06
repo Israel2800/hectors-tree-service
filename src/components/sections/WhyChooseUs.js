@@ -2,29 +2,29 @@ import { FaShieldAlt, FaAward, FaLeaf, FaHeadset } from 'react-icons/fa'
 import { HiCheckCircle } from 'react-icons/hi'
 import { useInView } from '../../hooks/useInView'
 import SectionTitle from '../ui/SectionTitle'
+import ResponsiveImage from '../ui/ResponsiveImage'
 import { stats } from '../../data'
-import treeCareImg from '../../assets/images/tree-care.jpg'
 
 const reasons = [
   {
-    Icon:  FaShieldAlt,
+    Icon: FaShieldAlt,
     title: 'Fully Licensed & Insured',
-    desc:  'We carry comprehensive liability insurance and workers\' compensation — every job, every time.',
+    desc: 'We carry comprehensive liability insurance and workers compensation on every job.',
   },
   {
-    Icon:  FaAward,
+    Icon: FaAward,
     title: 'Certified Arborists',
-    desc:  'Our crew is trained and certified, bringing professional expertise to every project.',
+    desc: 'Our crew is trained and certified, bringing professional expertise to every project.',
   },
   {
-    Icon:  FaLeaf,
+    Icon: FaLeaf,
     title: 'Eco-Responsible Methods',
-    desc:  'We prioritize tree health and environmental care, recycling wood chips and minimizing waste.',
+    desc: 'We prioritize tree health and environmental care, recycling wood chips and minimizing waste.',
   },
   {
-    Icon:  FaHeadset,
+    Icon: FaHeadset,
     title: '24/7 Emergency Response',
-    desc:  "Storm damage doesn't keep business hours. Neither do we — call us any time.",
+    desc: "Storm damage doesn't keep business hours. Neither do we - call us any time.",
   },
 ]
 
@@ -66,21 +66,19 @@ export default function WhyChooseUs() {
 
   return (
     <>
-      {/* ── Why Us ── */}
       <section className="page-section bg-white">
         <div className="container-xl">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
-
-            {/* Image */}
             <div
               ref={imgRef}
               className={`relative rounded-3xl overflow-hidden shadow-2xl transition-all duration-700 ${
                 imgInView ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-8'
               }`}
             >
-              <img
-                src={treeCareImg}
+              <ResponsiveImage
+                image="tree-care"
                 alt="Our professional team at work"
+                sizes="(min-width: 1024px) 45vw, 100vw"
                 className="w-full h-80 lg:h-[500px] object-cover"
                 loading="lazy"
               />
@@ -95,7 +93,6 @@ export default function WhyChooseUs() {
               </div>
             </div>
 
-            {/* Content */}
             <div>
               <SectionTitle
                 eyebrow="Why Choose Us"
@@ -119,7 +116,6 @@ export default function WhyChooseUs() {
         </div>
       </section>
 
-      {/* ── Stats ── */}
       <section className="bg-forest-900 py-16">
         <div className="container-xl">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">

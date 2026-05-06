@@ -1,11 +1,12 @@
 import { useState } from 'react'
 import { HiX, HiChevronLeft, HiChevronRight } from 'react-icons/hi'
-import { useInView } from '../hooks/useInView'
 import ContactCTA from '../components/sections/ContactCTA'
+import PageHero from '../components/ui/PageHero'
+import ResponsiveImage from '../components/ui/ResponsiveImage'
+import { useInView } from '../hooks/useInView'
 import { galleryImages } from '../data'
-import mainImage from '../assets/images/mainImage.jpg'
 
-function GalleryItem({ src, alt, index, onOpen, delay }) {
+function GalleryItem({ imageKey, alt, index, onOpen, delay }) {
   const [ref, inView] = useInView()
 
   return (
@@ -17,9 +18,10 @@ function GalleryItem({ src, alt, index, onOpen, delay }) {
       }`}
       style={{ transitionDelay: `${delay}ms` }}
     >
-      <img
-        src={src}
+      <ResponsiveImage
+        image={imageKey}
         alt={alt}
+        sizes="(min-width: 1280px) 18vw, (min-width: 640px) 30vw, 50vw"
         loading="lazy"
         className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
       />
@@ -40,7 +42,6 @@ function Lightbox({ images, index, onClose, onPrev, onNext }) {
       className="fixed inset-0 z-[999] bg-black/95 flex items-center justify-center"
       onClick={onClose}
     >
-      {/* Close */}
       <button
         className="absolute top-5 right-5 w-10 h-10 bg-white/10 hover:bg-white/20 rounded-full flex items-center justify-center text-white transition-colors"
         onClick={onClose}
@@ -48,30 +49,36 @@ function Lightbox({ images, index, onClose, onPrev, onNext }) {
         <HiX className="w-5 h-5" />
       </button>
 
-      {/* Prev */}
       <button
         className="absolute left-4 sm:left-8 w-11 h-11 bg-white/10 hover:bg-white/20 rounded-full flex items-center justify-center text-white transition-colors"
-        onClick={(e) => { e.stopPropagation(); onPrev() }}
+        onClick={(event) => {
+          event.stopPropagation()
+          onPrev()
+        }}
       >
         <HiChevronLeft className="w-6 h-6" />
       </button>
 
-      {/* Image */}
-      <div className="max-w-5xl max-h-[85vh] px-20" onClick={(e) => e.stopPropagation()}>
-        <img
-          src={images[index].src}
+      <div className="max-w-5xl max-h-[85vh] px-20" onClick={(event) => event.stopPropagation()}>
+        <ResponsiveImage
+          image={images[index].imageKey}
           alt={images[index].alt}
+          sizes="90vw"
+          loading="eager"
+          fetchPriority="high"
           className="max-w-full max-h-[85vh] object-contain rounded-xl shadow-2xl"
         />
         <p className="text-center text-gray-400 text-sm mt-3">
-          {images[index].alt} · {index + 1} / {images.length}
+          {images[index].alt} - {index + 1} / {images.length}
         </p>
       </div>
 
-      {/* Next */}
       <button
         className="absolute right-4 sm:right-8 w-11 h-11 bg-white/10 hover:bg-white/20 rounded-full flex items-center justify-center text-white transition-colors"
-        onClick={(e) => { e.stopPropagation(); onNext() }}
+        onClick={(event) => {
+          event.stopPropagation()
+          onNext()
+        }}
       >
         <HiChevronRight className="w-6 h-6" />
       </button>
@@ -82,43 +89,37 @@ function Lightbox({ images, index, onClose, onPrev, onNext }) {
 export default function Gallery() {
   const [lightboxIndex, setLightboxIndex] = useState(null)
 
-  const open  = (i) => setLightboxIndex(i)
+  const open = (index) => setLightboxIndex(index)
   const close = () => setLightboxIndex(null)
-  const prev  = () => setLightboxIndex((i) => (i - 1 + galleryImages.length) % galleryImages.length)
-  const next  = () => setLightboxIndex((i) => (i + 1) % galleryImages.length)
+  const prev = () => setLightboxIndex((index) => (index - 1 + galleryImages.length) % galleryImages.length)
+  const next = () => setLightboxIndex((index) => (index + 1) % galleryImages.length)
 
   return (
     <>
-      {/* ── Hero ── */}
-      <section className="relative h-72 sm:h-96 flex items-end overflow-hidden">
-        <div className="absolute inset-0">
-          <img src={mainImage} alt="Gallery" className="w-full h-full object-cover" />
-          <div className="absolute inset-0 bg-gray-950/65" />
-        </div>
-        <div className="relative z-10 container-xl pb-14 pt-32">
-          <p className="text-forest-400 text-sm font-bold uppercase tracking-widest mb-2">Our Work</p>
-          <h1 className="font-heading font-extrabold text-4xl sm:text-5xl text-white">Photo Gallery</h1>
-        </div>
-      </section>
+      <PageHero
+        imageKey="mainImage"
+        alt="Gallery"
+        eyebrow="Our Work"
+        title="Photo Gallery"
+      />
 
-      {/* ── Grid ── */}
       <section className="page-section bg-white">
         <div className="container-xl">
           <div className="text-center mb-12">
             <p className="text-gray-500 text-lg">
-              {galleryImages.length} photos · Click any image to view full-size
+              {galleryImages.length} photos - click any image to view full-size
             </p>
           </div>
 
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
-            {galleryImages.map(({ src, alt }, i) => (
+            {galleryImages.map(({ imageKey, alt }, index) => (
               <GalleryItem
-                key={i}
-                src={src}
+                key={imageKey}
+                imageKey={imageKey}
                 alt={alt}
-                index={i}
+                index={index}
                 onOpen={open}
-                delay={Math.min(i * 40, 400)}
+                delay={Math.min(index * 40, 400)}
               />
             ))}
           </div>

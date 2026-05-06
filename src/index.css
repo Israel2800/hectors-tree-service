@@ -32,4 +32,25 @@
   .container-xl {
     @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
   }
+
+  .hero-screen {
+    min-height: 100vh;
+    min-height: 100svh;
+  }
+
+  .page-hero {
+    min-height: 20rem;
+  }
+
+  @media (min-width: 640px) {
+    .page-hero {
+      min-height: 24rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .page-hero {
+      min-height: 28rem;
+    }
+  }
 }

@@ -2,11 +2,12 @@ import { Link } from 'react-router-dom'
 import { HiArrowRight, HiPhotograph } from 'react-icons/hi'
 import { useInView } from '../../hooks/useInView'
 import SectionTitle from '../ui/SectionTitle'
+import ResponsiveImage from '../ui/ResponsiveImage'
 import { galleryImages } from '../../data'
 
 const preview = galleryImages.slice(0, 6)
 
-function GalleryItem({ src, alt, delay }) {
+function GalleryItem({ imageKey, alt, delay }) {
   const [ref, isInView] = useInView()
 
   return (
@@ -17,9 +18,10 @@ function GalleryItem({ src, alt, delay }) {
       }`}
       style={{ transitionDelay: `${delay}ms` }}
     >
-      <img
-        src={src}
+      <ResponsiveImage
+        image={imageKey}
         alt={alt}
+        sizes="(min-width: 1024px) 22vw, (min-width: 768px) 30vw, 50vw"
         className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
         loading="lazy"
       />
@@ -41,8 +43,8 @@ export default function GalleryPreview() {
         />
 
         <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mb-10">
-          {preview.map(({ src, alt }, i) => (
-            <GalleryItem key={i} src={src} alt={alt} delay={i * 60} />
+          {preview.map(({ imageKey, alt }, i) => (
+            <GalleryItem key={imageKey} imageKey={imageKey} alt={alt} delay={i * 60} />
           ))}
         </div>
 
