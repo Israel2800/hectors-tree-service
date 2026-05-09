@@ -239,6 +239,86 @@ export const responsiveImages = {
       ]
     }
   },
+  "4": {
+    "width": 3024,
+    "height": 4032,
+    "formats": {
+      "jpeg": [
+        {
+          "width": 480,
+          "height": 640,
+          "src": "/optimized-images/4/480.jpg"
+        },
+        {
+          "width": 768,
+          "height": 1024,
+          "src": "/optimized-images/4/768.jpg"
+        },
+        {
+          "width": 1024,
+          "height": 1365,
+          "src": "/optimized-images/4/1024.jpg"
+        },
+        {
+          "width": 1280,
+          "height": 1707,
+          "src": "/optimized-images/4/1280.jpg"
+        },
+        {
+          "width": 1600,
+          "height": 2133,
+          "src": "/optimized-images/4/1600.jpg"
+        },
+        {
+          "width": 1920,
+          "height": 2560,
+          "src": "/optimized-images/4/1920.jpg"
+        },
+        {
+          "width": 3024,
+          "height": 4032,
+          "src": "/optimized-images/4/3024.jpg"
+        }
+      ],
+      "webp": [
+        {
+          "width": 480,
+          "height": 640,
+          "src": "/optimized-images/4/480.webp"
+        },
+        {
+          "width": 768,
+          "height": 1024,
+          "src": "/optimized-images/4/768.webp"
+        },
+        {
+          "width": 1024,
+          "height": 1365,
+          "src": "/optimized-images/4/1024.webp"
+        },
+        {
+          "width": 1280,
+          "height": 1707,
+          "src": "/optimized-images/4/1280.webp"
+        },
+        {
+          "width": 1600,
+          "height": 2133,
+          "src": "/optimized-images/4/1600.webp"
+        },
+        {
+          "width": 1920,
+          "height": 2560,
+          "src": "/optimized-images/4/1920.webp"
+        },
+        {
+          "width": 3024,
+          "height": 4032,
+          "src": "/optimized-images/4/3024.webp"
+        }
+      ]
+    }
+  },
   "7": {
     "width": 4032,
     "height": 3024,

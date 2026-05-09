@@ -37,6 +37,22 @@ export default function ResponsiveImage({
     return null
   }
 
+  if (!asset.formats) {
+    return (
+      <img
+        src={asset.src}
+        width={asset.width}
+        height={asset.height}
+        alt={alt}
+        loading={loading}
+        fetchPriority={fetchPriority}
+        decoding={decoding}
+        className={className}
+        {...imgProps}
+      />
+    )
+  }
+
   const fallbackEntries = asset.formats.jpeg
   const webpEntries = asset.formats.webp
   const fallbackSource = fallbackEntries[fallbackEntries.length - 1]?.src

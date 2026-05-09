@@ -1,3 +1,5 @@
+import residentialTreeWorkImage from './assets/images/4.jpg'
+
 export const company = {
   name: "Hector's Tree Service",
   tagline: 'Expert Tree Care You Can Trust',
@@ -138,7 +140,14 @@ export const galleryImages = [
   { imageKey: 'tree-trimming', alt: 'Professional tree trimming' },
   { imageKey: '3', alt: 'Tree care service' },
   { imageKey: 'stump-removal', alt: 'Stump removal result' },
-  { imageKey: '4', alt: 'Residential tree work' },
+  {
+    imageKey: {
+      src: residentialTreeWorkImage,
+      width: 3024,
+      height: 4032,
+    },
+    alt: 'Residential tree work',
+  },
   { imageKey: 'tree-care', alt: 'Healthy tree maintenance' },
   { imageKey: '7', alt: 'Commercial property service' },
   { imageKey: 'tree-removal2', alt: 'Storm damage cleanup' },
