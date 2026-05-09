@@ -8,6 +8,7 @@ import Services from './pages/Services'
 import ServiceDetail from './pages/ServiceDetail'
 import Gallery from './pages/Gallery'
 import Contact from './pages/Contact'
+import FloatingContactActions from './components/ui/FloatingContactActions'
 
 function ScrollToTop() {
   const { pathname } = useLocation()
@@ -34,6 +35,7 @@ export default function App() {
           </Routes>
         </main>
         <Footer />
+        <FloatingContactActions />
       </div>
     </HashRouter>
   )

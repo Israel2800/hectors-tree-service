@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
-import { FaFacebookF, FaInstagram, FaGoogle } from 'react-icons/fa'
+import { FaFacebookF, FaGoogle, FaInstagram } from 'react-icons/fa'
+import { SiTiktok } from 'react-icons/si'
 import { HiPhone, HiMail, HiLocationMarker, HiClock } from 'react-icons/hi'
 import logo from '../../assets/HLogo.png'
 import { company } from '../../data'
@@ -19,9 +20,10 @@ const serviceLinks = [
 ]
 
 const socials = [
-  { Icon: FaFacebookF, label: 'Facebook',  href: '#' },
-  { Icon: FaInstagram, label: 'Instagram', href: '#' },
-  { Icon: FaGoogle,    label: 'Google',    href: '#' },
+  { Icon: FaFacebookF, label: 'Facebook', href: company.facebookHref },
+  { Icon: FaInstagram, label: 'Instagram', href: company.instagramHref },
+  { Icon: FaGoogle, label: 'Google Reviews', href: company.googleReviewsHref },
+  { Icon: SiTiktok, label: 'TikTok', href: company.tiktokHref },
 ]
 
 export default function Footer() {
@@ -33,7 +35,7 @@ export default function Footer() {
           {/* Brand */}
           <div className="sm:col-span-2 lg:col-span-1">
             <Link to="/" className="flex items-center gap-3 mb-5">
-              <img src={logo} alt={company.name} className="h-11 w-11 object-contain" />
+              <img src={logo} alt={company.name} className="h-[4.5rem] w-auto object-contain sm:h-[5.25rem]" />
               <div className="leading-tight">
                 <p className="font-heading font-bold text-white text-base">{company.name}</p>
                 <p className="text-xs text-forest-400">{company.license}</p>
@@ -47,6 +49,8 @@ export default function Footer() {
                 <a
                   key={label}
                   href={href}
+                  target={href === '#' ? undefined : '_blank'}
+                  rel={href === '#' ? undefined : 'noreferrer'}
                   aria-label={label}
                   className="w-9 h-9 rounded-full bg-gray-800 flex items-center justify-center text-gray-400 hover:bg-forest-700 hover:text-white transition-all duration-200"
                 >
@@ -112,7 +116,7 @@ export default function Footer() {
               </li>
               <li className="flex items-center gap-3 text-sm">
                 <HiMail className="w-4 h-4 text-forest-500 shrink-0" />
-                <a href={`mailto:${company.email}`} className="hover:text-forest-400 transition-colors break-all">
+                <a href={company.emailHref} className="hover:text-forest-400 transition-colors break-all">
                   {company.email}
                 </a>
               </li>

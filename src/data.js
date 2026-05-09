@@ -1,16 +1,26 @@
 export const company = {
   name: "Hector's Tree Service",
   tagline: 'Expert Tree Care You Can Trust',
-  phone: '615-401-0212',
-  phoneHref: 'tel:6154010212',
-  email: 'dady281100@gmail.com',
-  address: '1224 Cherrybark Dr, Smyrna, TN 37167',
+  phone: '(615) 821-9862',
+  phoneHref: 'tel:6158219862',
+  email: 'hectorstreeservice80@gmail.com',
+  emailHref: 'mailto:hectorstreeservice80@gmail.com',
+  address: '300 Country Village Dr, Smyrna, TN 37167',
+  mapDirectionsHref:
+    'https://www.google.com/maps/search/?api=1&query=300+Country+Village+Dr,+Smyrna,+TN+37167',
+  mapEmbedSrc:
+    'https://maps.google.com/maps?q=300+Country+Village+Dr,+Smyrna,+TN+37167&output=embed',
+  facebookHref: '#',
+  instagramHref: '#',
+  googleReviewsHref:
+    'https://www.google.com/search?q=Hector%27s+Tree+Service+Smyrna+TN+reviews',
+  tiktokHref: 'https://www.tiktok.com/search?q=hectorstreeservice',
   serviceAreas: 'La Vergne, Brentwood, Smyrna & Mt. Juliet, TN',
   license: 'Licensed & Insured',
   established: 2015,
   businessHours: [
-    { days: 'Monday - Friday', hours: '7:00 AM - 6:00 PM' },
-    { days: 'Saturday', hours: '8:00 AM - 4:00 PM' },
+    { days: 'Monday - Friday', hours: '7:00 AM - 5:00 PM' },
+    { days: 'Saturday', hours: '7:00 AM - 5:00 PM' },
     { days: 'Sunday', hours: 'Emergency Only' },
   ],
 }

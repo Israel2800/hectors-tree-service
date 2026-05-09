@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { HiPhone, HiChevronDown } from 'react-icons/hi'
+import { HiPhone } from 'react-icons/hi'
 import { FaCheckCircle, FaStar } from 'react-icons/fa'
 import ResponsiveImage from '../ui/ResponsiveImage'
 import { company } from '../../data'
@@ -29,11 +29,6 @@ export default function Hero() {
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32 lg:py-40 w-full">
         <div className="max-w-2xl xl:max-w-3xl">
-          <div className="animate-fade-in inline-flex items-center gap-2 bg-forest-700/25 border border-forest-500/40 text-forest-300 text-xs font-bold uppercase tracking-wider px-4 py-2 rounded-full mb-7">
-            <span className="w-2 h-2 rounded-full bg-forest-400 animate-pulse" />
-            {company.license} - Serving Nashville, TN
-          </div>
-
           <h1 className="animate-fade-in-up animation-delay-100 font-heading font-extrabold text-5xl sm:text-6xl lg:text-7xl text-white leading-[1.05] mb-6">
             Expert Tree Care{' '}
             <span className="text-forest-400">You Can Trust</span>
@@ -43,6 +38,13 @@ export default function Hero() {
             Professional tree removal, trimming &amp; care for homeowners
             across {company.serviceAreas}.
           </p>
+
+          <div className="animate-fade-in-up animation-delay-250 mb-8">
+            <span className="inline-flex items-center gap-2 rounded-full border border-forest-500/40 bg-forest-700/20 px-4 py-2 text-xs font-bold uppercase tracking-wider text-forest-300">
+              <span className="h-2 w-2 rounded-full bg-forest-400 animate-pulse" />
+              {company.license}
+            </span>
+          </div>
 
           <div className="animate-fade-in-up animation-delay-300 flex items-center gap-2 mb-8">
             <div className="flex">
@@ -78,11 +80,6 @@ export default function Hero() {
             </a>
           </div>
         </div>
-      </div>
-
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1.5 text-white/40 animate-bounce">
-        <span className="text-[10px] font-bold uppercase tracking-widest">Scroll</span>
-        <HiChevronDown className="w-5 h-5" />
       </div>
     </section>
   )

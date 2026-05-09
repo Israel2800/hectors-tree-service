@@ -1,13 +1,14 @@
 import { useState } from 'react'
 import {
+  HiArrowRight,
   HiPhone,
   HiMail,
   HiLocationMarker,
   HiClock,
   HiCheckCircle,
-  HiShieldCheck,
 } from 'react-icons/hi'
-import { FaFacebookF, FaInstagram } from 'react-icons/fa'
+import { FaFacebookF, FaGoogle, FaInstagram } from 'react-icons/fa'
+import { SiTiktok } from 'react-icons/si'
 import PageHero from '../components/ui/PageHero'
 import SectionTitle from '../components/ui/SectionTitle'
 import TurnstileWidget from '../components/ui/TurnstileWidget'
@@ -21,6 +22,37 @@ const services = [
   'Tree Care & Health',
   'Emergency Service',
   'Other',
+]
+
+const reviewLinks = [
+  {
+    name: 'Facebook',
+    href: company.facebookHref,
+    Icon: FaFacebookF,
+    description: 'Stay connected with updates, project photos, and community activity.',
+    accent: 'from-[#edf4ff] to-[#f8fbff] text-[#1877f2]',
+  },
+  {
+    name: 'Instagram',
+    href: company.instagramHref,
+    Icon: FaInstagram,
+    description: 'Browse recent work, before-and-after shots, and behind-the-scenes content.',
+    accent: 'from-[#fff0f7] to-[#fff8fb] text-[#d62976]',
+  },
+  {
+    name: 'Google Reviews',
+    href: company.googleReviewsHref,
+    Icon: FaGoogle,
+    description: 'See recent customer feedback and leave your own review.',
+    accent: 'from-[#fff4dd] to-[#fef9ef] text-[#c98300]',
+  },
+  {
+    name: 'TikTok',
+    href: company.tiktokHref,
+    Icon: SiTiktok,
+    description: 'Watch content, job highlights, and updates from the team.',
+    accent: 'from-[#eefaf7] to-[#f8fcfb] text-forest-700',
+  },
 ]
 
 function ContactInfo({ Icon, label, children }) {
@@ -143,6 +175,30 @@ export default function Contact() {
 
       <section className="page-section bg-gray-50">
         <div className="container-xl">
+          <div className="mb-10 text-center">
+            <span className="inline-block text-xs font-bold uppercase tracking-widest text-forest-600 mb-4">
+              Reviews &amp; Social
+            </span>
+
+            <div className="mx-auto flex max-w-xl flex-wrap items-center justify-center gap-3 sm:gap-4">
+              {reviewLinks.map(({ name, href, Icon, accent }) => (
+                <a
+                  key={name}
+                  href={href}
+                  target={href === '#' ? undefined : '_blank'}
+                  rel={href === '#' ? undefined : 'noreferrer'}
+                  aria-label={name}
+                  title={name}
+                  className="group flex h-14 w-14 items-center justify-center transition-all duration-200 hover:-translate-y-0.5 sm:h-16 sm:w-16"
+                >
+                  <div className={`flex h-11 w-11 items-center justify-center rounded-2xl bg-gradient-to-br ${accent} shadow-sm ring-1 ring-black/5 transition-all duration-200 group-hover:scale-105 group-hover:shadow-md sm:h-12 sm:w-12`}>
+                    <Icon className="h-4 w-4 sm:h-[1.05rem] sm:w-[1.05rem]" />
+                  </div>
+                </a>
+              ))}
+            </div>
+          </div>
+
           <SectionTitle
             eyebrow="Free Estimates"
             title="Simple, Fast, and Easy to Submit"
@@ -151,7 +207,7 @@ export default function Contact() {
 
           <div className="grid lg:grid-cols-5 gap-10">
             <div className="lg:col-span-3">
-              <div className="bg-white rounded-3xl shadow-sm border border-gray-100 p-8 sm:p-10">
+              <div id="estimate-form" className="bg-white rounded-3xl shadow-sm border border-gray-100 p-8 sm:p-10">
                 {status === 'success' ? (
                   <div className="flex flex-col items-center text-center py-10">
                     <div className="w-16 h-16 bg-forest-100 rounded-full flex items-center justify-center mb-4">
@@ -164,20 +220,6 @@ export default function Contact() {
                   </div>
                 ) : (
                   <form onSubmit={handleSubmit} className="space-y-5">
-                    <div className="rounded-2xl border border-forest-100 bg-forest-50 px-5 py-4">
-                      <div className="flex items-start gap-3">
-                        <div className="w-11 h-11 rounded-2xl bg-white flex items-center justify-center shadow-sm shrink-0">
-                          <HiShieldCheck className="w-6 h-6 text-forest-700" />
-                        </div>
-                        <div>
-                          <p className="font-semibold text-gray-900">Friendly and secure estimate request</p>
-                          <p className="text-sm text-gray-600 mt-1">
-                            This form is designed to be quick on mobile and desktop while still keeping strong anti-spam protection in place.
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-
                     <input
                       type="text"
                       name="companyWebsite"
@@ -369,7 +411,7 @@ export default function Contact() {
                 </ContactInfo>
 
                 <ContactInfo Icon={HiMail} label="Email">
-                  <a href={`mailto:${company.email}`} className="text-forest-700 hover:text-forest-900 transition-colors break-all">
+                  <a href={company.emailHref} className="text-forest-700 hover:text-forest-900 transition-colors break-all">
                     {company.email}
                   </a>
                 </ContactInfo>
@@ -383,17 +425,38 @@ export default function Contact() {
                   ))}
                 </ContactInfo>
 
-                <div className="flex gap-2.5 pt-1">
-                  {[FaFacebookF, FaInstagram].map((Icon, index) => (
-                    <a
-                      key={index}
-                      href="#"
-                      className="w-9 h-9 rounded-full bg-gray-100 flex items-center justify-center text-gray-500 hover:bg-forest-700 hover:text-white transition-all duration-200"
-                    >
-                      <Icon className="w-3.5 h-3.5" />
-                    </a>
-                  ))}
+                {/* Legacy Reviews & Social sidebar block kept commented for reference after moving the icons
+                into a compact horizontal strip above the Free Estimates section.
+                <div className="rounded-2xl bg-gray-50 border border-gray-100 px-5 py-5">
+                  <div className="flex items-center gap-2 text-gray-900 mb-2">
+                    <p className="font-heading font-bold text-lg">Reviews & Social</p>
+                  </div>
+                  <p className="text-sm text-gray-600 mb-4">
+                    Explore recent content and help future customers by sharing your experience.
+                  </p>
+
+                  <div className="space-y-3">
+                    {reviewLinks.map(({ name, href, Icon, description, accent }) => (
+                      <a
+                        key={name}
+                        href={href}
+                        target={href === '#' ? undefined : '_blank'}
+                        rel={href === '#' ? undefined : 'noreferrer'}
+                        className="group flex items-center gap-4 rounded-2xl border border-gray-100 bg-white px-4 py-4 transition-all duration-200 hover:-translate-y-0.5 hover:border-forest-200 hover:shadow-md"
+                      >
+                        <div className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br ${accent}`}>
+                          <Icon className="h-5 w-5" />
+                        </div>
+                        <div className="min-w-0 flex-1">
+                          <p className="font-semibold text-gray-900">{name}</p>
+                          <p className="text-sm text-gray-500">{description}</p>
+                        </div>
+                        <HiArrowRight className="h-4 w-4 shrink-0 text-gray-400 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:text-forest-700" />
+                      </a>
+                    ))}
+                  </div>
                 </div>
+                */}
               </div>
 
               <div className="bg-forest-900 rounded-3xl p-7 text-white">
@@ -424,17 +487,53 @@ export default function Contact() {
             </div>
           </div>
 
-          <div className="mt-12 rounded-3xl overflow-hidden shadow-lg border border-gray-100 h-80 sm:h-96">
-            <iframe
-              title="Hector's Tree Service Location"
-              src="https://maps.google.com/maps?q=1224+Cherrybark+Dr+Smyrna+TN+37167&output=embed"
-              width="100%"
-              height="100%"
-              style={{ border: 0 }}
-              allowFullScreen
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-            />
+          <div className="mt-12 overflow-hidden rounded-[2rem] border border-forest-100 bg-white shadow-xl shadow-forest-900/10">
+            <div className="grid gap-0 lg:grid-cols-[1.4fr,0.9fr]">
+              <div className="bg-gradient-to-r from-forest-900 via-forest-800 to-forest-700 px-6 py-7 sm:px-8">
+                <p className="text-xs font-bold uppercase tracking-[0.24em] text-forest-200">Service Location</p>
+                <h3 className="mt-2 font-heading text-2xl font-bold text-white">Visit or Search Our Service Area</h3>
+                <p className="mt-2 max-w-2xl text-sm leading-relaxed text-forest-100">
+                  Our map is centered on the business address so customers can quickly confirm location details and get directions with confidence.
+                </p>
+              </div>
+
+              <div className="bg-[#f8fbf9] px-6 py-7 sm:px-8">
+                <div className="space-y-4">
+                  <div>
+                    <p className="text-xs font-bold uppercase tracking-[0.24em] text-forest-700">Address</p>
+                    <p className="mt-1 text-sm font-semibold text-gray-900">{company.address}</p>
+                  </div>
+                  <div>
+                    <p className="text-xs font-bold uppercase tracking-[0.24em] text-forest-700">Hours</p>
+                    <p className="mt-1 text-sm text-gray-600">Monday - Saturday 7:00 AM - 5:00 PM</p>
+                    <p className="text-sm text-gray-600">Sunday Emergency Only</p>
+                  </div>
+                  <a
+                    href={company.mapDirectionsHref}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex items-center gap-2 rounded-xl bg-forest-700 px-5 py-3 text-sm font-semibold text-white transition-all duration-200 hover:-translate-y-0.5 hover:bg-forest-800"
+                  >
+                    Get Directions
+                    <HiArrowRight className="h-4 w-4" />
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <div className="relative h-80 overflow-hidden sm:h-96">
+              <div className="pointer-events-none absolute inset-0 z-10 bg-gradient-to-t from-forest-950/10 via-transparent to-transparent" />
+              <iframe
+                title="Hector's Tree Service Location"
+                src={company.mapEmbedSrc}
+                width="100%"
+                height="100%"
+                style={{ border: 0, filter: 'saturate(0.9) contrast(1.02)' }}
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+              />
+            </div>
           </div>
         </div>
       </section>

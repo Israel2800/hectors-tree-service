@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { Link, NavLink } from 'react-router-dom'
 import { HiMenu, HiX, HiPhone, HiChevronDown } from 'react-icons/hi'
 import logo from '../../assets/HLogo.png'
+import { company } from '../../data'
 
 const serviceLinks = [
   { name: 'Tree Removal',  path: '/services/tree-removal'  },
@@ -61,26 +62,14 @@ export default function Navbar() {
           {/* ── Logo ── */}
           <Link
             to="/"
-            className="flex items-center gap-3 shrink-0"
+            className="flex items-center shrink-0"
             onClick={() => setMobileOpen(false)}
           >
             <img
               src={logo}
               alt="Hector's Tree Service"
-              className="h-11 w-11 object-contain"
+              className="h-[4.5rem] w-auto object-contain sm:h-[5.25rem]"
             />
-            <div className="leading-tight">
-              <p className={`font-heading font-bold text-base transition-colors ${
-                scrolled ? 'text-forest-900' : 'text-white'
-              }`}>
-                Hector's Tree Service
-              </p>
-              <p className={`text-xs font-medium transition-colors ${
-                scrolled ? 'text-forest-600' : 'text-forest-300'
-              }`}>
-                Licensed &amp; Insured
-              </p>
-            </div>
           </Link>
 
           {/* ── Desktop Nav ── */}
@@ -146,13 +135,13 @@ export default function Navbar() {
           {/* ── Desktop CTA ── */}
           <div className="hidden lg:flex items-center gap-4">
             <a
-              href="tel:6154010212"
+              href={company.phoneHref}
               className={`flex items-center gap-1.5 text-sm font-semibold transition-colors ${
                 scrolled ? 'text-forest-700 hover:text-forest-900' : 'text-white/90 hover:text-white'
               }`}
             >
               <HiPhone className="w-4 h-4" />
-              (615) 401-0212
+              {company.phone}
             </a>
             <Link
               to="/contact"
@@ -249,11 +238,11 @@ export default function Navbar() {
 
           <div className="pt-4 border-t border-gray-100 space-y-3">
             <a
-              href="tel:6154010212"
+              href={company.phoneHref}
               className="flex items-center gap-2 px-4 py-2 text-forest-700 font-semibold text-sm"
             >
               <HiPhone className="w-4 h-4" />
-              (615) 401-0212
+              {company.phone}
             </a>
             <Link
               to="/contact"
